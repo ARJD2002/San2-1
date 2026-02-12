@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Girasol 🌻</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f6d365, #fda085);
+    color: #5a3e00;
+    overflow-x: hidden;
+}
+
+/* Girasoles flotando */
+.girasol {
+    position: fixed;
+    font-size: 25px;
+    animation: flotar 8s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+
+h1 {
+    margin-top: 80px;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#si {
+    background-color: #ffcc00;
+    color: #5a3e00;
+}
+
+#no {
+    background-color: #d9534f;
+    color: white;
+}
+
+img.principal {
+    width: 260px;
+    border-radius: 20px;
+    margin-top: 20px;
+}
+
+.esquina {
+    position: fixed;
+    width: 120px;
+    border-radius: 20px;
+}
+
+.esquina-izq {
+    top: 10px;
+    left: 50px;
+}
+
+.esquina-der {
+    bottom: 120px;
+    right: 10px;
+}
+
+#mensajeFinal {
+    display: none;
+    font-size: 18px;
+    margin-top: 25px;
+    padding: 20px;
+    animation: aparecer 2s ease-in-out;
+}
+
+@keyframes aparecer {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+#contador {
+    margin-top: 10px;
+    font-size: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Girasoles flotando -->
+<script>
+for(let i=0;i<25;i++){
+    let flor=document.createElement("div");
+    flor.innerHTML="🌻";
+    flor.className="girasol";
+    flor.style.left=Math.random()*100+"vw";
+    flor.style.fontSize=(Math.random()*25+20)+"px";
+    flor.style.animationDuration=(Math.random()*5+5)+"s";
+    document.body.appendChild(flor);
+}
+</script>
+
+<!-- Imágenes esquinas -->
+<img src="esquina1.jpg" class="esquina esquina-izq">
+<img src="esquina2.jpg" class="esquina esquina-der">
+
+<h1>¿Quieres ser mi San Valentín? 🌻</h1>
+
+<h2 id="contador"></h2>
+
+<img src="principal.jpg" class="principal">
+
+<br>
+
+<button id="si" onclick="aceptar()">Sí 🌻</button>
+<button id="no" onclick="hacerGrande()">No 😢</button>
+
+<div id="mensajeFinal">
+Se que en todos estos años a medida que ha pasado el tiempo se ve más lejana la oportunidad en verdad de vernos,
+pero yo creo que todo este tiempo el saber y entender que no siempre se puede obtener lo que uno quiere de inmediato
+y saber esperar por el momento será muy bonito.
+<br><br>
+Se que cuando en verdad nos veamos lloraremos de alegría por por fin poder darnos nuestro primer beso 💋🌻
+</div>
+
+<audio id="musica" src="cancion.mp3" loop></audio>
+<script>
+    // Música (se activa al primer clic)
+    document.body.addEventListener("click", () => {
+        document.getElementById("musica").play();
+    }, { once: true });
+
+let tamaño = 18;
+
+function hacerGrande() {
+    tamaño += 10;
+    document.getElementById("si").style.fontSize = tamaño + "px";
+}
+
+function aceptar() {
+    document.getElementById("mensajeFinal").style.display = "block";
+    document.getElementById("no").style.display = "none";
+}
+
+/* Contador exacto */
+function actualizarContador() {
+    const inicio = new Date(2021, 10, 16);
+    const hoy = new Date();
+
+    let años = hoy.getFullYear() - inicio.getFullYear();
+    let meses = hoy.getMonth() - inicio.getMonth();
+    let dias = hoy.getDate() - inicio.getDate();
+
+    if (dias < 0) {
+        meses--;
+        const ultimoMes = new Date(hoy.getFullYear(), hoy.getMonth(), 0);
+        dias += ultimoMes.getDate();
+    }
+
+    if (meses < 0) {
+        años--;
+        meses += 12;
+    }
+
+    document.getElementById("contador").innerHTML =
+        `🌻 Llevamos ${años} años, ${meses} meses y ${dias} días juntos 🌻`;
+}
+
+actualizarContador();
+setInterval(actualizarContador, 60000);
+</script>
+
+</body>
+</html>
